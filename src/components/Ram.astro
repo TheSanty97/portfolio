@@ -1,0 +1,16 @@
+---
+import Characters from "./R&M/Characters.astro";
+
+
+---
+<section id="rickandmorty" class="min-h-screen flex flex-col justify-center items-center bg-transparent text-white px-8">
+  <h1 class="text-4xl font-bold mb-6">Rick and Morty</h1>
+  <p class="max-w-2xl text-center text-lg mb-8">
+    Aquí encontrarás una lista de personajes del universo de Rick and Morty. Explora sus historias y características únicas.
+  </p>
+  <Characters client:load />
+  <p class="max-w-2xl text-center text-lg mt-4">
+    ¡Disfruta explorando el multiverso de Rick and Morty!
+  </p>
+
+</section>

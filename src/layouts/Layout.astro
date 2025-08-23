@@ -1,22 +1,183 @@
+---
+import "../styles/global.css";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Mi Portafolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta
+      name="description"
+      content="Portafolio de Santiago Pérez - Ingeniero de Software."
+    />
+    <meta
+      property="og:title"
+      content="Portafolio de desarrollo de Santiago Pérez"
+    />
+    <meta
+      property="og:description"
+      content="Portafolio de Santiago Pérez - Ingeniero de Software."
+    />
+    <meta
+      property="og:image"
+      content="https://santiagoperez.dev/og-image.png"
+    />
+    <meta property="og:url" content="https://santiagoperez.dev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@thesanty97" />
+    <meta name="twitter:creator" content="@santiagoperez" />
+    <meta
+      name="twitter:title"
+      content="Portafolio de desarrollo de Santiago Pérez"
+    />
+  </head>
+  <body class="flex flex-col min-h-screen galaxy-bg">
+    <Header class="fixed top-0 left-0 w-full z-10" />
+    <main class="flex-grow mt-16 mb-16">
+      <slot />
+    </main>
+    <Footer class="fixed bottom-0 left-0 w-full z-10" />
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body.galaxy-bg {
+    position: relative;
+    overflow-y: auto; /* scroll normal */
+    background: #0a0a1a;
+    min-height: 100vh;
+  }
+
+  /* Estrellas */
+  body.galaxy-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(3px 3px at 5% 10%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 15% 25%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 30% 40%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 45% 60%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 60% 20%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 70% 70%, #fff, transparent 50%),
+      radial-gradient(3px 3px at 85% 80%, #fff, transparent 50%);
+    background-size: 50% 50%;
+    background-repeat: repeat;
+    overflow: hidden; /* evita que el translate genere espacio */
+    animation: move-stars 10s linear infinite;
+    opacity: 0.9;
+    z-index: -1;
+  }
+
+  /* Movimiento de estrellas reducido */
+  @keyframes move-stars {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-2%, -2%);
+    } /* translate muy pequeño */
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  /* Galaxias */
+  body.galaxy-bg::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+        circle at 20% 30%,
+        rgba(153, 204, 255, 0.2),
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at 70% 80%,
+        rgba(255, 153, 204, 0.2),
+        transparent 70%
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        rgba(204, 153, 255, 0.3),
+        transparent 80%
+      );
+    background-size: 100% 100%;
+    overflow: hidden; /* evita overflow por animación */
+    animation: move-galaxies 60s linear infinite;
+    opacity: 0.6;
+    z-index: -2;
+  }
+
+  /* Movimiento de galaxias reducido */
+  @keyframes move-galaxies {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-1%, -1%) scale(1.02);
+    } /* translate pequeño */
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll("header nav a");
+    const sections = document.querySelectorAll("section");
+    const header = document.querySelector("header");
+    const headerHeight = header ? header.offsetHeight : 0;
+  
+    // Función para actualizar la sección activa
+    const updateActiveLink = () => {
+      let currentSectionId = "home"; // por defecto al entrar
+  
+      sections.forEach(section => {
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        // Si la sección está al menos parcialmente visible en el viewport
+        if (rect.top <= headerHeight && rect.bottom > headerHeight) {
+          currentSectionId = section.id || "home";
+        }
+      });
+  
+      navLinks.forEach(link => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${currentSectionId}`);
+      });
+    };
+  
+    // Actualiza al cargar
+    updateActiveLink();
+  
+    // Actualiza al hacer scroll
+    window.addEventListener("scroll", updateActiveLink);
+  
+    // Actualiza al hacer clic en un link
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        setTimeout(updateActiveLink, 100); // espera que el scroll ocurra
+      });
+    });
+  });
+  </script>
+  
+
+
