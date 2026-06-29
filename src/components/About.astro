@@ -1,40 +1,94 @@
 <section
   id="about"
-  class="min-h-screen flex flex-col justify-center items-center bg-transparent text-white px-8"
+  class="flex flex-col items-center bg-transparent text-white px-6 py-20 md:py-28 scroll-mt-20"
 >
-  <h2 class="text-4xl font-bold mb-2">Sobre mí</h2>
-  <hr class="w-40 border-t-2 border-blue-500 mb-6" />
-  <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-10 max-w-4xl">
-    <div>
+  <h2
+    class="text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+  >
+    Sobre mí
+  </h2>
+  <span class="block w-20 h-1 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 mb-10"></span>
+
+  <div
+    class="flex flex-col md:flex-row items-center md:items-start gap-10 max-w-4xl"
+  >
+    <div class="relative shrink-0">
+      <div
+        class="absolute -inset-1 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 blur opacity-60"
+      ></div>
       <img
-        src="https://github.com/TheSanty97/portfolio/blob/main/src/assets/profile.jpeg?raw=true"
+        src="/profile.jpeg"
         alt="Foto de perfil de Santiago Pérez"
         loading="lazy"
-        class="w-150 h-auto rounded-2xl border-2 border-blue-500 mt-2 object-cover"
+        class="relative w-56 h-56 md:w-72 md:h-72 rounded-2xl object-cover"
       />
     </div>
     <div>
-      <p class="max-w-2xl text-2xl">
+      <p class="text-2xl">
         ¡Hola! Soy <b>Santiago Pérez</b>
       </p>
-      <p class="max-w-2xl text-justify text-lg font-bold mt-4">
-        Tecnólogo en análisis y desarrollo de sistemas de información y
-        estudiante de Ingeniería de Software.
-      </p>
-      <p class="max-w-2xl text-justify text-lg mt-4">
+      <p class="text-lg font-bold text-blue-300 mt-2">Ingeniero de Software</p>
+      <p class="text-justify text-base md:text-lg mt-4 text-white/80">
         Me apasiona el mundo de la tecnología y la evolución que esta tiene cada
-        día, soy estudiante de Ingeniería de Software y una persona
-        autodidacta que le gusta estar en constante aprendizaje de nuevas
-        tecnologias y las mejores aplicaciones que estas pueden ofrecernos, con
-        ganas de seguir creciendo en el mundo del software y poder crear los
-        mejores proyectos aplicando las practicas de construccion de software que he ido aprendiendo y mejorando en el transcurso del tiempo.
+        día. Soy una persona autodidacta a la que le gusta estar en constante
+        aprendizaje de nuevas tecnologías y las mejores aplicaciones que estas
+        pueden ofrecernos, con ganas de seguir creciendo en el mundo del
+        software y crear los mejores proyectos aplicando las prácticas de
+        construcción de software que he ido aprendiendo y mejorando con el
+        tiempo.
       </p>
-      <p class="max-w-2xl text-justify text-lg mt-4">
+      <p class="text-justify text-base md:text-lg mt-4 text-white/80">
+        En los últimos tiempos me he enfocado en la <b>inteligencia
+        artificial</b>: trabajo con modelos de lenguaje (LLMs), integración de
+        IA en aplicaciones y el <b>manejo de agentes de IA</b> para automatizar
+        tareas y flujos de trabajo. Me apasiona aprovechar estas herramientas
+        para acelerar el desarrollo y construir productos más inteligentes.
+      </p>
+      <p class="text-justify text-base md:text-lg mt-4 text-white/80">
         Creé este portafolio con el fin de aplicar mis conocimientos y
-        habilidades e ir actualizandolo con nuevas funcionalidades y mejoras de
-        interfaz, para que quede plasmado en este toda la experiencia que vaya
+        habilidades e ir actualizándolo con nuevas funcionalidades y mejoras de
+        interfaz, para que quede plasmada en él toda la experiencia que vaya
         recolectando en el camino.
       </p>
+
+      <h3 class="text-xl font-bold mt-8 mb-4">Tecnologías</h3>
+      <ul class="flex flex-wrap gap-2">
+        {
+          [
+            "Angular",
+            "TypeScript",
+            ".NET",
+            "C#",
+            "API REST",
+            "Microservicios",
+            "SQL",
+            "Astro",
+            "Tailwind CSS",
+          ].map((tech) => (
+            <li class="px-3 py-1 rounded-full text-sm bg-white/10 border border-white/15 hover:border-blue-400/60 hover:bg-blue-500/10 transition duration-300">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
+
+      <h3 class="text-xl font-bold mt-6 mb-4">IA &amp; Automatización</h3>
+      <ul class="flex flex-wrap gap-2">
+        {
+          [
+            "Inteligencia Artificial",
+            "LLMs",
+            "Agentes de IA",
+            "Prompt Engineering",
+            "Integración de IA",
+            "Automatización",
+          ].map((tech) => (
+            <li class="px-3 py-1 rounded-full text-sm bg-purple-500/10 border border-purple-400/30 text-purple-100 hover:border-purple-300/70 hover:bg-purple-500/20 transition duration-300">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </div>
 </section>

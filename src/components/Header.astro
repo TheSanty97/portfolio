@@ -1,53 +1,116 @@
 <header
-  class="fixed top-0 left-0 w-full h-25 bg-transparent text-white flex justify-center items-center z-10"
+  class="fixed top-0 left-0 w-full bg-[#0a0a1a]/60 backdrop-blur-md text-white z-20 border-b border-white/10"
 >
-  <nav class="flex space-x-4">
-    <a
-      href="#home"
-      data-target="home"
-      class="px-4 py-2 rounded-full border-3 border-transparent bg-purple-500 text-white font-semibold hover:bg-blue-700 hover:border-gradient-to-r hover:from-blue-700 hover:to-purple-500 transition duration-300"
-    >
-      Inicio
+  <nav class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <a href="#home" class="text-lg font-bold tracking-wide">
+      Santiago<span class="text-blue-400">Pérez</span>
     </a>
-    <a
-      href="#about"
-      data-target="about"
-      class="px-4 py-2 rounded-full border-3 border-transparent bg-purple-500 text-white font-semibold hover:bg-blue-700 hover:border-gradient-to-r hover:from-blue-700 hover:to-purple-500 transition duration-300"
+
+    <!-- Desktop nav -->
+    <ul class="hidden md:flex items-center gap-2">
+      <li>
+        <a
+          href="#home"
+          class="nav-link px-4 py-2 rounded-full font-semibold text-sm bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+        >
+          Inicio
+        </a>
+      </li>
+      <li>
+        <a
+          href="#about"
+          class="nav-link px-4 py-2 rounded-full font-semibold text-sm bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+        >
+          Sobre mí
+        </a>
+      </li>
+      <li>
+        <a
+          href="#projects"
+          class="nav-link px-4 py-2 rounded-full font-semibold text-sm bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+        >
+          Proyectos
+        </a>
+      </li>
+      <li>
+        <a
+          href="#contact"
+          class="nav-link px-4 py-2 rounded-full font-semibold text-sm bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+        >
+          Contacto
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile toggle -->
+    <button
+      id="menu-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      class="md:hidden flex flex-col gap-1.5 p-2"
     >
-      Sobre mí
-    </a>
-    <a
-      href="#projects"
-      data-target="projects"
-      class="px-4 py-2 rounded-full border-3 border-transparent bg-purple-500 text-white font-semibold hover:bg-blue-700 hover:border-gradient-to-r hover:from-blue-700 hover:to-purple-500 transition duration-300"
-    >
-      Proyectos
-    </a>
-    <a
-      href="#contact"
-      data-target="contact"
-      class="px-4 py-2 rounded-full border-3 border-transparent bg-purple-500 text-white font-semibold hover:bg-blue-700 hover:border-gradient-to-r hover:from-blue-700 hover:to-purple-500 transition duration-300"
-    >
-      Contacto
-    </a>
+      <span class="block w-6 h-0.5 bg-white transition-transform"></span>
+      <span class="block w-6 h-0.5 bg-white transition-opacity"></span>
+      <span class="block w-6 h-0.5 bg-white transition-transform"></span>
+    </button>
   </nav>
+
+  <!-- Mobile menu -->
+  <ul
+    id="mobile-menu"
+    class="hidden md:hidden flex-col items-center gap-2 pb-4 px-6 bg-[#0a0a1a]/90"
+  >
+    <li class="w-full">
+      <a
+        href="#home"
+        class="nav-link block text-center px-4 py-2 rounded-full font-semibold bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+      >
+        Inicio
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        href="#about"
+        class="nav-link block text-center px-4 py-2 rounded-full font-semibold bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+      >
+        Sobre mí
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        href="#projects"
+        class="nav-link block text-center px-4 py-2 rounded-full font-semibold bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+      >
+        Proyectos
+      </a>
+    </li>
+    <li class="w-full">
+      <a
+        href="#contact"
+        class="nav-link block text-center px-4 py-2 rounded-full font-semibold bg-purple-500/80 hover:bg-blue-700 transition duration-300"
+      >
+        Contacto
+      </a>
+    </li>
+  </ul>
 </header>
 
-<!-- <script>
-  document.querySelectorAll("header nav a").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("data-target"); // usamos data-target
-      if (!targetId) return;
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
 
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        // Scroll suave
-        targetSection.scrollIntoView({ behavior: "smooth" });
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("hidden") === false;
+    menu?.classList.toggle("flex", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
 
-        // Cambiar la URL a /home, /about, etc.
-        history.pushState(null, "", `/${targetId}`);
-      }
+  // Cierra el menú móvil al hacer clic en un enlace
+  menu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu.classList.add("hidden");
+      menu.classList.remove("flex");
+      toggle?.setAttribute("aria-expanded", "false");
     });
   });
-</script> -->
+</script>
